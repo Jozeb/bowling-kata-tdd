@@ -23,8 +23,7 @@ public class BowlingGameShould {
     @Test
     public void showCorrectScoreAfterTwoRolls() {
         BowlingGame bowlingGame = new BowlingGame();
-        bowlingGame.roll(1);
-        bowlingGame.roll(1);
+        roll(bowlingGame, 1, 1);
         int actual = bowlingGame.score();
         assertEquals(2, actual);
     }
@@ -32,9 +31,7 @@ public class BowlingGameShould {
     @Test
     public void showCorrectScoreAfterSpare() {
         BowlingGame bowlingGame = new BowlingGame();
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(1);
+        roll(bowlingGame, 5, 5, 1);
         int actual = bowlingGame.score();
         assertEquals(12, actual);
     }
@@ -42,12 +39,14 @@ public class BowlingGameShould {
     @Test
     public void showCorrectScoreAfterTwoSpares() {
         BowlingGame bowlingGame = new BowlingGame();
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(1);
+        roll(bowlingGame, 5, 5, 5, 5, 1);
         int actual = bowlingGame.score();
         assertEquals(27, actual);
+    }
+
+    public void roll(BowlingGame bowlingGame, int... pins) {
+        for (int pin : pins) {
+            bowlingGame.roll(pin);
+        }
     }
 }
