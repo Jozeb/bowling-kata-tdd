@@ -12,14 +12,14 @@ public class BowlingGameShould {
   }
 
   @Test
-  public void init() throws InvalidPinException {
+  public void init() throws BowlingGameException {
     BowlingGame bowlingGame = new BowlingGame();
     Pin value = new Pin(3);
     bowlingGame.roll(value);
   }
 
   @Test(expected = InvalidPinException.class)
-  public void notAllowInvalidPin() throws InvalidPinException {
+  public void notAllowInvalidPin() throws BowlingGameException {
     BowlingGame bowlingGame = new BowlingGame();
     Pin value = new Pin(11);
     bowlingGame.roll(value);
@@ -27,7 +27,7 @@ public class BowlingGameShould {
 
 
   @Test
-  public void addToScore() {
+  public void addToScore() throws BowlingGameException {
     BowlingGame bowlingGame = new BowlingGame();
     Score expected = new Score(5);
     Pin firstRoll = new Pin(2);
@@ -38,6 +38,16 @@ public class BowlingGameShould {
     Score score = bowlingGame.score();
 
     Assert.assertEquals(expected, score);
+  }
+
+  @Test(expected = InvalidFrameException.class)
+  public void notAllowInvalidFrame() throws BowlingGameException{
+    BowlingGame bowlingGame = new BowlingGame();
+    Pin firstRoll = new Pin(2);
+    Pin secondRoll = new Pin(9);
+
+    bowlingGame.roll(firstRoll);
+    bowlingGame.roll(secondRoll);
   }
 
 }

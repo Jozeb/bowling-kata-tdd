@@ -1,6 +1,6 @@
 package Exception;
 
-public class InvalidPinException extends RuntimeException {
+public class InvalidPinException extends BowlingGameException {
 
     public InvalidPinException(){
         super();
