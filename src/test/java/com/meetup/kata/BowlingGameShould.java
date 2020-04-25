@@ -1,3 +1,5 @@
+package com.meetup.kata;
+
 import org.junit.Test;
 
 public class BowlingGameShould {
