@@ -1,7 +1,7 @@
 public class Game {
     private int score;
 
-    public void roll(int i) {
+    public void roll(int i) throws GameHasEndedException {
         score += i;
     }
 
