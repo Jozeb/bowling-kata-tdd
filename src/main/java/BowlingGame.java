@@ -3,6 +3,7 @@ import roll.RollingAfter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static roll.RollingAfter.DOUBLE_STRIKE;
 import static roll.RollingAfter.STRIKE;
 import static roll.RollingAfter.NORMAL;
 import static roll.RollingAfter.SPARE;
@@ -24,12 +25,16 @@ public class BowlingGame {
     public int recursiveScore(List<Integer> numbers, int previousRoll, int multiplier, RollingAfter rollingAfter) {
         if (numbers.size() > 0) {
             if (isNewFrame(previousRoll) && numbers.get(0) == 10) {
+                if (rollingAfter == STRIKE) {
+                    return multiplyCurrentRoll(numbers, multiplier)
+                            + recursiveScore(splitList(numbers), NEW_FRAME, 3, DOUBLE_STRIKE);
+                }
                 return multiplyCurrentRoll(numbers, multiplier)
                         + recursiveScore(splitList(numbers), NEW_FRAME, 2, STRIKE);
             }
             if (rollingAfter == STRIKE) {
                 return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), NEW_FRAME, 2, STRIKE_THEN_NORMAL);
+                        + recursiveScore(splitList(numbers), numbers.get(0), 2, STRIKE_THEN_NORMAL);
             }
             if (isSpare(numbers, previousRoll)) {
                 return multiplyCurrentRoll(numbers, multiplier)
