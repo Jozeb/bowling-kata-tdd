@@ -13,4 +13,10 @@ public class BowlingGameShould {
     bowlingGame.roll(3);
   }
 
+  @Test(expected = InvalidPinException.class)
+  public void throwInvalidPinException(){
+    BowlingGame bowlingGame = new BowlingGame();
+    bowlingGame.roll(11);
+  }
+
 }
