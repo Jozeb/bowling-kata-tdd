@@ -1,10 +1,13 @@
+import Domain.Pin;
+import Domain.Score;
+
 public class BowlingGame {
 
-    public void roll(Pin i) throws InvalidPinException {
+    public void roll(Pin i) {
 
     }
 
-    public int score() {
-        return 2;
+    public Score score() {
+        return new Score(2);
     }
 }

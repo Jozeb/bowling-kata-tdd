@@ -1,3 +1,5 @@
+package Domain;
+import Exception.InvalidPinException;
 public class Pin {
 
     int value;

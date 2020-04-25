@@ -1,5 +1,8 @@
+import Domain.Pin;
+import Domain.Score;
 import org.junit.Assert;
 import org.junit.Test;
+import Exception.*;
 
 public class BowlingGameShould {
 
@@ -25,10 +28,11 @@ public class BowlingGameShould {
   @Test
   public void addToScore() {
     BowlingGame bowlingGame = new BowlingGame();
+    Score expected = new Score(2);
     Pin value = new Pin(2);
     bowlingGame.roll(value);
-    int score = bowlingGame.score();
-    Assert.assertEquals(2,score);
+    Score score = bowlingGame.score();
+    Assert.assertEquals(expected,score);
   }
 
 }
