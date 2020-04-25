@@ -5,8 +5,7 @@ public class BowlingGameShould {
     @Test
     public void scoreZeroWhenNoPinsDown() {
         BowlingGame bowlingGame = new BowlingGame();
-        for (int i = 0; i < 20; i++)
-            bowlingGame.roll(0);
+        gutterBowls(bowlingGame, 20);
         int actual = bowlingGame.score();
         assert actual == 0;
     }
@@ -15,9 +14,7 @@ public class BowlingGameShould {
     public void scoreOneWhenOnePinDown() {
         BowlingGame bowlingGame = new BowlingGame();
 
-        for (int i = 0; i < 19; i++) {
-            bowlingGame.roll(0);
-        }
+        gutterBowls(bowlingGame, 19);
         bowlingGame.roll(1);
         int actual = bowlingGame.score();
         assert actual == 1;
@@ -27,13 +24,17 @@ public class BowlingGameShould {
     public void scoreThreeInTwoRolls() {
         BowlingGame bowlingGame = new BowlingGame();
 
-        for (int i = 0; i < 18; i++) {
-            bowlingGame.roll(0);
-        }
+        gutterBowls(bowlingGame, 18);
         bowlingGame.roll(1);
         bowlingGame.roll(2);
         int actual = bowlingGame.score();
         assert actual == 3;
+    }
+
+    private void gutterBowls(BowlingGame bowlingGame, int times) {
+        for (int i = 0; i < times; i++) {
+            bowlingGame.roll(0);
+        }
     }
 
 
