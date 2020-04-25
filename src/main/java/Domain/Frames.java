@@ -12,15 +12,53 @@ public class Frames {
     }
 
     public void add(Pin pin) throws InvalidFrameException {
-
         if (isFrameCompleted){
-            frames[frameNumber] = new Frame(pin);
-            isFrameCompleted = false;
+            addANewFrame(pin);
         } else {
-            frames[frameNumber++].add(pin);
-            isFrameCompleted = true;
+            addToExistingFrame(pin);
         }
+        toggleFrameCompleted();
 
     }
 
+    private void addToExistingFrame(Pin pin) throws InvalidFrameException {
+        frames[frameNumber].add(pin);
+    }
+
+    private void addANewFrame(Pin pin) {
+        frames[frameNumber] = new Frame(pin);
+        if(notFirstFrame() && previousFrame().isSpare()) {
+            previousFrame().score.add(pin);
+        }
+    }
+
+    private boolean notFirstFrame() {
+        return frameNumber != 0;
+    }
+
+    private Frame previousFrame() {
+        return frames[frameNumber-1];
+    }
+
+    private void toggleFrameCompleted() {
+        this.isFrameCompleted = !this.isFrameCompleted;
+        if(currentFrame().isStrike()) {
+            this.isFrameCompleted = true;
+        }
+        if(isFrameCompleted) {
+            frameNumber++;
+        }
+    }
+
+    private Frame currentFrame() {
+        return frames[frameNumber];
+    }
+
+    public Score getTotalScore() {
+        Score score = new Score();
+        for (int i =0; i<=frameNumber; i++) {
+            score.add(frames[i]);
+        }
+        return score;
+    }
 }

@@ -6,16 +6,15 @@ public class Frame {
 
     Pin pin1, pin2;
     Score score;
+    FrameType frameType = FrameType.NORMAL;
 
-//    public Frame(Pin pin1, Pin pin2) {
-//        this.pin1 = pin1;
-//        this.pin2 = pin2;
-//    }
-
-    public Frame(Pin pin1) {
-        this.pin1 = pin1;
+    public Frame(Pin pin) {
+        this.pin1 = pin;
         score = new Score();
-        score.add(pin1);
+        score.add(pin);
+        if(pin.value == 10) {
+            this.frameType = FrameType.STRIKE;
+        }
     }
 
     public void add(Pin pin) throws InvalidFrameException {
@@ -23,9 +22,18 @@ public class Frame {
         if((score.value + pin.value) > 10){
             throw new InvalidFrameException();
         }
-
+        if((score.value + pin.value) == 10){
+            this.frameType = FrameType.SPARE;
+        }
         this.pin2 = pin;
         score.add(pin2);
     }
 
+    public boolean isStrike() {
+        return frameType.equals(FrameType.STRIKE);
+    }
+
+    public boolean isSpare() {
+        return frameType.equals(FrameType.SPARE);
+    }
 }

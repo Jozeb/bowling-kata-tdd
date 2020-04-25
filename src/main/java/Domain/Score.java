@@ -29,4 +29,8 @@ public class Score {
         this.value = this.value + pin.value;
     }
 
+    public void add(Frame frame) {
+        this.value += frame.score.value;
+    }
+
 }

@@ -1,5 +1,7 @@
 import Domain.Pin;
 import Domain.Score;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import Exception.*;
@@ -29,12 +31,18 @@ public class BowlingGameShould {
   @Test
   public void addToScore() throws BowlingGameException {
     BowlingGame bowlingGame = new BowlingGame();
-    Score expected = new Score(5);
-    Pin firstRoll = new Pin(2);
-    Pin secondRoll = new Pin(3);
+    Score expected = new Score(15);
 
-    bowlingGame.roll(firstRoll);
-    bowlingGame.roll(secondRoll);
+    List<Pin> pins = new ArrayList<Pin>();
+    pins.add(new Pin(2));
+    pins.add(new Pin(3));
+    pins.add( new Pin(3));
+    pins.add( new Pin(7));
+
+    for(Pin pin: pins) {
+      bowlingGame.roll(pin);
+    }
+
     Score score = bowlingGame.score();
 
     Assert.assertEquals(expected, score);
@@ -50,4 +58,22 @@ public class BowlingGameShould {
     bowlingGame.roll(secondRoll);
   }
 
+  @Test
+  public void addToScoreWhenSpare() throws BowlingGameException {
+    BowlingGame bowlingGame = new BowlingGame();
+    Score expected = new Score(20);
+
+    List<Pin> pins = new ArrayList<Pin>();
+    pins.add(new Pin(3));
+    pins.add(new Pin(7));
+    pins.add( new Pin(5));
+
+    for(Pin pin: pins) {
+      bowlingGame.roll(pin);
+    }
+
+    Score score = bowlingGame.score();
+
+    Assert.assertEquals(expected, score);
+  }
 }
