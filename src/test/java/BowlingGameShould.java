@@ -28,11 +28,15 @@ public class BowlingGameShould {
   @Test
   public void addToScore() {
     BowlingGame bowlingGame = new BowlingGame();
-    Score expected = new Score(2);
-    Pin value = new Pin(2);
-    bowlingGame.roll(value);
+    Score expected = new Score(5);
+    Pin firstRoll = new Pin(2);
+    Pin secondRoll = new Pin(3);
+
+    bowlingGame.roll(firstRoll);
+    bowlingGame.roll(secondRoll);
     Score score = bowlingGame.score();
-    Assert.assertEquals(expected,score);
+
+    Assert.assertEquals(expected, score);
   }
 
 }
