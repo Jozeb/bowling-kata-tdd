@@ -1,5 +1,12 @@
+import roll.RollingAfter;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static roll.RollingAfter.STRIKE;
+import static roll.RollingAfter.NORMAL;
+import static roll.RollingAfter.SPARE;
+import static roll.RollingAfter.STRIKE_THEN_NORMAL;
 
 public class BowlingGame {
 
@@ -11,21 +18,29 @@ public class BowlingGame {
     }
 
     public int score() {
-        return recursiveScore(rolls, NEW_FRAME, 1);
+        return recursiveScore(rolls, NEW_FRAME, 1, NORMAL);
     }
 
-    public int recursiveScore(List<Integer> numbers, int previousRoll, int multiplier) {
+    public int recursiveScore(List<Integer> numbers, int previousRoll, int multiplier, RollingAfter rollingAfter) {
         if (numbers.size() > 0) {
+            if (isNewFrame(previousRoll) && numbers.get(0) == 10) {
+                return multiplyCurrentRoll(numbers, multiplier)
+                        + recursiveScore(splitList(numbers), NEW_FRAME, 2, STRIKE);
+            }
+            if (rollingAfter == STRIKE) {
+                return multiplyCurrentRoll(numbers, multiplier)
+                        + recursiveScore(splitList(numbers), NEW_FRAME, 2, STRIKE_THEN_NORMAL);
+            }
             if (isSpare(numbers, previousRoll)) {
                 return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), NEW_FRAME, 2);
+                        + recursiveScore(splitList(numbers), NEW_FRAME, 2, SPARE);
             }
             if (isNewFrame(previousRoll)) {
                 return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), numbers.get(0), 1);
+                        + recursiveScore(splitList(numbers), numbers.get(0), 1, NORMAL);
             }
             return multiplyCurrentRoll(numbers, multiplier)
-                    + recursiveScore(splitList(numbers), NEW_FRAME, 1);
+                    + recursiveScore(splitList(numbers), NEW_FRAME, 1, NORMAL);
         }
         return 0;
     }
