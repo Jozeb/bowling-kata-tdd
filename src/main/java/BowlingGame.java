@@ -32,7 +32,7 @@ public class BowlingGame {
                 return multiplyCurrentRoll(numbers, rollingAfter)
                         + recursiveScore(splitList(numbers), NEW_FRAME, SINGLE_STRIKE, frameNumber + 1);
             }
-            if (rollingAfter == SINGLE_STRIKE) {
+            if (rollingAfter == SINGLE_STRIKE || rollingAfter == DOUBLE_STRIKE) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
                         + recursiveScore(splitList(numbers), numbers.get(0), STRIKE_THEN_NORMAL, frameNumber);
             }
