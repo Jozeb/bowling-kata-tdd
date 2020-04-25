@@ -11,6 +11,7 @@ public class BowlingGame {
                 pinsDown += pins;
             }
             rollIteration = 0;
+            sumOfTwoRolls = 0;
         }
         sumOfTwoRolls += pins;
         rollIteration++;

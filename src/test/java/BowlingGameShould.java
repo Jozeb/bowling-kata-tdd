@@ -44,6 +44,22 @@ public class BowlingGameShould {
         Assert.assertEquals(20, actual);
     }
 
+    @Test
+    public void score35WhenTwoSparesInSixRolls() {
+        BowlingGame bowlingGame = new BowlingGame();
+        gutterBowls(bowlingGame, 14);
+        bowlingGame.roll(5);
+        bowlingGame.roll(5);
+        bowlingGame.roll(5);
+        bowlingGame.roll(5);
+        bowlingGame.roll(4);
+        bowlingGame.roll(2);
+        int actual = bowlingGame.score();
+        Assert.assertEquals(35, actual);
+    }
+
+
+
     private void gutterBowls(BowlingGame bowlingGame, int times) {
         for (int i = 0; i < times; i++) {
             bowlingGame.roll(0);
