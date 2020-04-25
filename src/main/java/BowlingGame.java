@@ -8,22 +8,10 @@ public class BowlingGame {
     public void roll(int pins) {
         pinsDown += pins;
 
-        if(isStrike ){
-            if(strikePinCounter <2){
-                pinsDown += pins;
-                strikePinCounter++;
-            }
-            else if (strikePinCounter == 2)
-                isStrike = false;
-        }
-        else{
-            if (rollIteration == 2) {
-                if (sumOfTwoRolls == 10) {
-                    pinsDown += pins;
-                }
-                rollIteration = 0;
-                sumOfTwoRolls = 0;
-            }
+        if(isStrike){
+            handleAfterStrike(pins);
+        } else if (rollIteration == 2) {
+            handleAfterSpare(pins);
         }
 
         if(pins == 10){
@@ -32,6 +20,23 @@ public class BowlingGame {
 
         sumOfTwoRolls += pins;
         rollIteration++;
+    }
+
+    private void handleAfterSpare(int pins) {
+        if (sumOfTwoRolls == 10) {
+            pinsDown += pins;
+        }
+        rollIteration = 0;
+        sumOfTwoRolls = 0;
+    }
+
+    private void handleAfterStrike(int pins) {
+        if(strikePinCounter <2){
+            pinsDown += pins;
+            strikePinCounter++;
+        }
+        else if (strikePinCounter == 2)
+            isStrike = false;
     }
 
     public int score() {
