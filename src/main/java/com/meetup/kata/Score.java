@@ -9,7 +9,6 @@ public class Score {
   }
 
   public void update(int pins) {
-
-      score += pins;
+    score += pins;
   }
 }

@@ -6,6 +6,7 @@ public class Game {
   private int rollCounter;
   private int lastPins;
   private boolean isStrike;
+
   Game() {
     score = new Score();
     rollCounter = 0;
@@ -13,17 +14,16 @@ public class Game {
     isStrike = false;
   }
 
-  private boolean isFrameComplete(){
-    if(rollCounter%2!=0 && rollCounter!=0)
-    {
+  private boolean isFrameComplete() {
+    if (rollCounter % 2 != 0 && rollCounter != 0) {
       return true;
     }
     return false;
   }
 
-  private void checkStrike(int pins)  {
-    if((lastPins+pins)==10){
-      isStrike=true;
+  private void checkStrike(int pins) {
+    if ((lastPins + pins) == 10) {
+      isStrike = true;
     }
   }
 
@@ -32,14 +32,13 @@ public class Game {
 
     score.update(pins);
     checkStrike(pins);
-    if(isFrameComplete()){
+    if (isFrameComplete()) {
 
-      if(isStrike)
-      {
+      if (isStrike) {
         score.update(pins);
 
       }
-      isStrike=false;
+      isStrike = false;
     }
 
     lastPins = pins;

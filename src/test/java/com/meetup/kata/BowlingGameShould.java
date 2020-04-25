@@ -6,8 +6,7 @@ import org.junit.Test;
 public class BowlingGameShould {
 
   @Test
-  public void calculateFrameScore()
-  {
+  public void calculateFrameScore() {
     Game game = new Game();
     // roll 1st
     int firstRollPins = 6;
@@ -17,16 +16,14 @@ public class BowlingGameShould {
     int secondRollPins = 3;
     game.roll(secondRollPins);
 
-    Score score =  game.score();
+    Score score = game.score();
 
-
-    Assert.assertEquals(9,  score.getScore());
+    Assert.assertEquals(9, score.getScore());
 
   }
 
   @Test
-  public void calculateFrameScoreWhenThereIsSpare()
-  {
+  public void calculateFrameScoreWhenThereIsSpare() {
     Game game = new Game();
 
     int firstRollPins = 6;
@@ -44,9 +41,9 @@ public class BowlingGameShould {
     int fifthRollPins = 3;
     game.roll(fifthRollPins);
 
-    Score score =  game.score();
+    Score score = game.score();
 
-    Assert.assertEquals(25,  score.getScore());
+    Assert.assertEquals(25, score.getScore());
 
   }
 
