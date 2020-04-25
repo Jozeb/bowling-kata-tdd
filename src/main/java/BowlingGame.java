@@ -2,52 +2,66 @@ public class BowlingGame {
 
     int score;
     int lastScore;
-    int currentScore;
+    boolean isLastFrameSpare;
     boolean isLastFrameStrike;
-    int strikeHandled;
+    int strikesHandled;
     boolean isSecondRoll;
 
     BowlingGame() {
         score = 0;
         lastScore = 0;
-        currentScore = 0;
-        strikeHandled = 0;
+        strikesHandled = 0;
         isSecondRoll = false;
+        isLastFrameSpare = false;
         isLastFrameStrike = false;
     }
 
     public void roll(int rollPins) {
-
         if (isLastFrameStrike) {
-//            strike
-            if (strikeHandled < 2) score = score + rollPins;
-            strikeHandled++;
-            if (strikeHandled == 2) {
-                isLastFrameStrike = false;
-                strikeHandled = 0;
-            }
-        } else {
-//            spare
-            if (lastScore == 10) {
-                this.score = this.score + rollPins;
-            }
-
-            if (isSecondRoll) {
-                lastScore = lastScore + rollPins;
-            } else {
-                lastScore = rollPins;
-            }
+            handleLastStrikeCase(rollPins);
+        } else if (isLastFrameSpare) {
+            handleLastSpareCase(rollPins);
         }
 
-        if (rollPins != 10) {
-            isSecondRoll = !isSecondRoll;
-        }
+        checkSpareCase(rollPins);
+        checkStrikeCase(rollPins);
 
         this.score = this.score + rollPins;
+        lastScore = rollPins;
+        isSecondRoll = !isSecondRoll;
+    }
 
-        if (rollPins == 10) {
+    private void checkStrikeCase(int rollPins) {
+        if (isAllPinsDown(rollPins)) {
             isLastFrameStrike = true;
-            strikeHandled = 0;
+            strikesHandled = 0;
+            isSecondRoll = false;
+        }
+    }
+
+    private boolean isAllPinsDown(int rollPins) {
+        return rollPins == 10;
+    }
+
+    private void checkSpareCase(int rollPins) {
+        if (isSecondRoll) {
+            if (lastScore + rollPins == 10) {
+                isLastFrameSpare = true;
+            }
+        }
+    }
+
+    private void handleLastSpareCase(int rollPins) {
+        this.score = this.score + rollPins;
+        isLastFrameSpare = false;
+    }
+
+    private void handleLastStrikeCase(int rollPins) {
+        if (strikesHandled < 2) score = score + rollPins;
+        strikesHandled++;
+        if (strikesHandled == 2) {
+            isLastFrameStrike = false;
+            strikesHandled = 0;
         }
     }
 
