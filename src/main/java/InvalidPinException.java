@@ -1,3 +1,6 @@
-public class InvalidPinException extends Throwable {
+public class InvalidPinException extends RuntimeException {
 
+    public InvalidPinException(){
+        super();
+    }
 }
