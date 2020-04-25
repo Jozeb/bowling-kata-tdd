@@ -1,4 +1,9 @@
 package Game;
 
 public class Game {
+
+    public void roll(int i) {
+
+    }
+
 }

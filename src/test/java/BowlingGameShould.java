@@ -15,7 +15,7 @@ public class BowlingGameShould {
   }
 
   @Test
-  public void haveTenFrames() {
+  public void calculateScoreCorrectlyIfThereIsNoSpareAndStrik() {
     Game game = new Game();
     game.roll(0);
   }
