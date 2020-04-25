@@ -9,4 +9,13 @@ public class BowlingScoreCalculatedCorrectlyWhen {
             game.roll(0);
         Assert.assertEquals(game.score(), 0);
     }
+
+    @Test
+    public void thereIsNoStrikeOrSpare() {
+        Game game = new Game();
+        for (int i = 0; i < 20; i++)
+            game.roll(1);
+        Assert.assertEquals(game.score(), 20);
+    }
+
 }
