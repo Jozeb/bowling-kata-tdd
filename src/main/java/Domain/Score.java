@@ -9,8 +9,8 @@ public class Score {
     public Score(int value) {
         this.value = value;
     }
+    public Score(){
 
-    public Score() {
     }
 
     @Override
@@ -29,4 +29,5 @@ public class Score {
     public void add(Pin pin) {
         this.value = this.value + pin.value;
     }
+
 }
