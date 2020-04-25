@@ -9,6 +9,9 @@ public class Score {
   }
 
   public void update(int pins) {
-    score += pins;
+    if (score == 10)
+      score += (2* pins);
+    else
+      score += pins;
   }
 }
