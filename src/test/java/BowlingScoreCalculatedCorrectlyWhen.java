@@ -1,3 +1,4 @@
+import exceptions.GameException;
 import exceptions.GameHasEndedException;
 import exceptions.InvalidRollException;
 import org.junit.Assert;
@@ -5,7 +6,7 @@ import org.junit.Test;
 
 public class BowlingScoreCalculatedCorrectlyWhen {
     @Test
-    public void noPinsAreKnocked() throws GameHasEndedException, InvalidRollException {
+    public void noPinsAreKnocked() throws GameException {
         Game game = new Game();
         for (int i = 0; i < 20; i++)
             game.roll(0);
@@ -13,7 +14,7 @@ public class BowlingScoreCalculatedCorrectlyWhen {
     }
 
     @Test
-    public void thereIsNoStrikeOrSpare() throws GameHasEndedException, InvalidRollException {
+    public void thereIsNoStrikeOrSpare() throws GameException{
         Game game = new Game();
         for (int i = 0; i < 20; i++)
             game.roll(1);
@@ -21,7 +22,7 @@ public class BowlingScoreCalculatedCorrectlyWhen {
     }
 
     @Test
-    public void thereIsASpare() throws GameHasEndedException, InvalidRollException {
+    public void thereIsASpare() throws GameException {
 
         Game game = new Game();
         game.roll(5);
@@ -34,7 +35,7 @@ public class BowlingScoreCalculatedCorrectlyWhen {
     }
 
     @Test
-    public void thereIsASpareTest2() throws GameHasEndedException, InvalidRollException {
+    public void thereIsASpareTest2() throws GameException {
 
         Game game = new Game();
         game.roll(1);

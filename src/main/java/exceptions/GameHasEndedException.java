@@ -1,4 +1,4 @@
 package exceptions;
 
-public class GameHasEndedException extends Exception {
+public class GameHasEndedException extends GameException {
 }

@@ -1,4 +1,4 @@
 package exceptions;
 
-public class InvalidRollException extends  Exception {
+public class InvalidRollException extends  GameException {
 }

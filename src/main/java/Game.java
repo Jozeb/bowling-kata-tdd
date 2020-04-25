@@ -1,3 +1,4 @@
+import exceptions.GameException;
 import exceptions.GameHasEndedException;
 import exceptions.InvalidRollException;
 
@@ -13,7 +14,7 @@ public class Game {
         this.rolls = new ArrayList<>();
     }
 
-    public void roll(int i) throws GameHasEndedException, InvalidRollException {
+    public void roll(int i) throws GameException {
 
         if(i>10){
           throw  new InvalidRollException();
