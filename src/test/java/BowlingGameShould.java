@@ -95,9 +95,9 @@ public class BowlingGameShould {
     @Test
     public void showCorrectScoreWithTripleStrikes() {
         BowlingGame bowlingGame = new BowlingGame();
-        roll(bowlingGame, 10, 10, 10, 1, 0);
+        roll(bowlingGame, 10, 10, 10, 1, 1);
         int actual = bowlingGame.score();
-        assertEquals(63, actual);
+        assertEquals(65, actual);
     }
 
     public void roll(BowlingGame bowlingGame, int... pins) {
