@@ -52,6 +52,14 @@ public class BowlingGameShould {
         assertEquals(18, actual);
     }
 
+    @Test
+    public void showCorrectScoreWithGutterBetweenSpares() {
+        BowlingGame bowlingGame = new BowlingGame();
+        roll(bowlingGame, 5, 5, 0, 5, 5, 5, 1);
+        int actual = bowlingGame.score();
+        assertEquals(27, actual);
+    }
+
     public void roll(BowlingGame bowlingGame, int... pins) {
         for (int pin : pins) {
             bowlingGame.roll(pin);
