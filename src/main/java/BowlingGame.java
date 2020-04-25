@@ -24,15 +24,15 @@ public class BowlingGame {
 
     public int recursiveScore(List<Integer> numbers, int previousRoll, RollingAfter rollingAfter, int frameNumber) {
         if (numbers.size() > 0) {
-            if (isStrike(numbers, previousRoll) && (rollingAfter == SINGLE_STRIKE || rollingAfter == DOUBLE_STRIKE)) {
+            if (isStrike(numbers, previousRoll) && rollingAfter.strike()) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
                         + recursiveScore(splitList(numbers), NEW_FRAME, DOUBLE_STRIKE, frameNumber + 1);
             }
-            if (isStrike(numbers, previousRoll) && !(rollingAfter == SINGLE_STRIKE || rollingAfter == DOUBLE_STRIKE)) {
+            if (isStrike(numbers, previousRoll) && !rollingAfter.strike()) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
                         + recursiveScore(splitList(numbers), NEW_FRAME, SINGLE_STRIKE, frameNumber + 1);
             }
-            if (rollingAfter == SINGLE_STRIKE || rollingAfter == DOUBLE_STRIKE) {
+            if (rollingAfter.strike()) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
                         + recursiveScore(splitList(numbers), numbers.get(0), STRIKE_THEN_NORMAL, frameNumber);
             }

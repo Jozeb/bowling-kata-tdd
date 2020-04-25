@@ -9,6 +9,10 @@ public enum RollingAfter {
         this.multiplier = multiplier;
     }
 
+    public boolean strike() {
+        return this == SINGLE_STRIKE || this == DOUBLE_STRIKE;
+    }
+
     public int getMultiplier() {
         return multiplier;
     }
