@@ -30,6 +30,10 @@ public class BowlingGameShould {
                 {Arrays.asList(10), 10}, // strike
                 {Arrays.asList(10, 3), 16}, // strike + 1 roll
                 {Arrays.asList(10, 3, 3), 22}, // strike + 2 rolls
+                {Arrays.asList(1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1), 61},
+                {Arrays.asList(1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7), 68},
+                {Arrays.asList(1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3), 71}
+
         });
     }
 
