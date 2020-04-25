@@ -3,6 +3,7 @@ import java.util.List;
 
 public class BowlingGame {
 
+    public static final int NEW_FRAME = -1;
     List<Integer> rolls = new ArrayList<>();
 
     public void roll(int pins) {
@@ -10,21 +11,21 @@ public class BowlingGame {
     }
 
     public int score() {
-        return recursiveScore(rolls, -1, 1);
+        return recursiveScore(rolls, NEW_FRAME, 1);
     }
 
     public int recursiveScore(List<Integer> numbers, int previousRoll, int multiplier) {
         if (numbers.size() > 0) {
             if (isSpare(numbers, previousRoll)) {
                 return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), -1, 2);
+                        + recursiveScore(splitList(numbers), NEW_FRAME, 2);
             }
-            if (firstRollOfFrame(previousRoll)) {
+            if (isNewFrame(previousRoll)) {
                 return multiplyCurrentRoll(numbers, multiplier)
                         + recursiveScore(splitList(numbers), numbers.get(0), 1);
             }
             return multiplyCurrentRoll(numbers, multiplier)
-                    + recursiveScore(splitList(numbers), -1, 1);
+                    + recursiveScore(splitList(numbers), NEW_FRAME, 1);
         }
         return 0;
     }
@@ -37,8 +38,8 @@ public class BowlingGame {
         return multiplier * numbers.get(0);
     }
 
-    private boolean firstRollOfFrame(int previousRoll) {
-        return previousRoll == -1;
+    private boolean isNewFrame(int previousRoll) {
+        return previousRoll == NEW_FRAME;
     }
 
     private boolean isSpare(List<Integer> numbers, int previousRoll) {
