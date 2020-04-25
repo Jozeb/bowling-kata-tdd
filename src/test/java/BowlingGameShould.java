@@ -16,7 +16,7 @@ public class BowlingGameShould {
         BowlingGame bowlingGame = new BowlingGame();
 
         gutterBowls(bowlingGame, 19);
-        bowlingGame.roll(1);
+        roll(bowlingGame,1);
         int actual = bowlingGame.score();
         assert actual == 1;
     }
@@ -26,8 +26,7 @@ public class BowlingGameShould {
         BowlingGame bowlingGame = new BowlingGame();
 
         gutterBowls(bowlingGame, 18);
-        bowlingGame.roll(1);
-        bowlingGame.roll(2);
+        roll(bowlingGame,1,2);
         int actual = bowlingGame.score();
         assert actual == 3;
     }
@@ -36,10 +35,7 @@ public class BowlingGameShould {
     public void score20whenOneSpareInFourRolls() {
         BowlingGame bowlingGame = new BowlingGame();
         gutterBowls(bowlingGame, 16);
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(4);
-        bowlingGame.roll(2);
+        roll(bowlingGame,5,5,4,2);
         int actual = bowlingGame.score();
         Assert.assertEquals(20, actual);
     }
@@ -48,17 +44,25 @@ public class BowlingGameShould {
     public void score35WhenTwoSparesInSixRolls() {
         BowlingGame bowlingGame = new BowlingGame();
         gutterBowls(bowlingGame, 14);
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(4);
-        bowlingGame.roll(2);
+        roll(bowlingGame,5,5,5,5,4,2);
         int actual = bowlingGame.score();
         Assert.assertEquals(35, actual);
     }
 
+    @Test
+    public void scoreValidWhenOneStrikeInThreeRolls() {
+        BowlingGame bowlingGame = new BowlingGame();
+        gutterBowls(bowlingGame, 17);
+        roll(bowlingGame,10,5,3);
+        int actual = bowlingGame.score();
+        Assert.assertEquals(26, actual);
+    }
 
+    private void roll(BowlingGame bowlingGame,int... pins){
+        for(int pin : pins){
+            bowlingGame.roll(pin);
+        }
+    }
 
     private void gutterBowls(BowlingGame bowlingGame, int times) {
         for (int i = 0; i < times; i++) {
