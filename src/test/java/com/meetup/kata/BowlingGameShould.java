@@ -28,21 +28,21 @@ public class BowlingGameShould {
   public void calculateFrameScoreWhenThereIsSpare()
   {
     Game game = new Game();
-    // roll 1st
+
     int firstRollPins = 6;
     game.roll(firstRollPins);
 
-    // roll 2nd
-    int secondRollPins = 4;
+    int secondRollPins = 3;
     game.roll(secondRollPins);
 
-    // roll 3rd
     int thirdRollPins = 6;
     game.roll(thirdRollPins);
 
-    // roll 4th
-    int fourthRollPins = 3;
+    int fourthRollPins = 4;
     game.roll(fourthRollPins);
+
+    int fifthRollPins = 3;
+    game.roll(fifthRollPins);
 
     Score score =  game.score();
 
