@@ -1,46 +1,43 @@
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
 public class BowlingGameShould {
 
-  @Test
-  public void haveCumulativeScore1AfterSingleRoleOf1() {
-    BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(1);
-    int actualScore = bowlingGame.score();
-    int expectedScore = 1;
-    assertEquals(expectedScore, actualScore);
-  }
+    @Parameter(0)
+    public List<Integer> rollScores;
 
-  @Test
-  public void haveCumulativeScore4AfterSingleRoleOf4() {
-    BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(4);
-    int actualScore = bowlingGame.score();
-    int expectedScore = 4;
-    assertEquals(expectedScore, actualScore);
-  }
-  @Test
-  public void haveCumulativeScore5AfterRoll1And4() {
-    BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(1);
-    bowlingGame.roll(4);
-    int actualScore = bowlingGame.score();
-    int expectedScore = 5;
-    assertEquals(expectedScore, actualScore);
-  }
+    @Parameter(1)
+    public int expectedScore;
 
-  @Test
-  public void haveCumulativeScore20AfterSpareAnd6() {
-    BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(6);
-    bowlingGame.roll(4);
-    bowlingGame.roll(5);
-    int actualScore = bowlingGame.score();
-    int expectedScore = 20;
-    assertEquals(expectedScore, actualScore);
-  }
+    @Parameterized.Parameters(name = "have score of {1} with rolls: {0}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {Arrays.asList(1), 1},
+                {Arrays.asList(4), 4},
+                {Arrays.asList(1, 4), 5},
+                {Arrays.asList(6, 4, 5), 20} // spare case
+        });
+    }
 
+    @Test
+    public void haveScoreOf() {
+//        prepare/setup
+        BowlingGame bowlingGame = new BowlingGame();
+
+//        act
+        this.rollScores.forEach(bowlingGame::roll);
+
+//        assert
+        assertEquals(this.expectedScore, bowlingGame.score());
+    }
 
 }
