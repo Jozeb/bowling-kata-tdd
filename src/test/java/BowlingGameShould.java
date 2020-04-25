@@ -76,6 +76,22 @@ public class BowlingGameShould {
         assertEquals(33, actual);
     }
 
+    @Test
+    public void showCorrectScoreWithStrikeGutterSpare() {
+        BowlingGame bowlingGame = new BowlingGame();
+        roll(bowlingGame, 10, 0, 10, 1, 1);
+        int actual = bowlingGame.score();
+        assertEquals(33, actual);
+    }
+
+    @Test
+    public void showCorrectScoreWithSampleReadmeGameExceptLastMove() {
+        BowlingGame bowlingGame = new BowlingGame();
+        roll(bowlingGame, 1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8);
+        int actual = bowlingGame.score();
+        assertEquals(127, actual);
+    }
+
     public void roll(BowlingGame bowlingGame, int... pins) {
         for (int pin : pins) {
             bowlingGame.roll(pin);
