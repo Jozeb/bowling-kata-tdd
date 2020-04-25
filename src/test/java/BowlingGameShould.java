@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 public class BowlingGameShould {
 
   @Test
-  public void haveCumulativeScoreAfterSingleRoleOf1() {
+  public void haveCumulativeScore1AfterSingleRoleOf1() {
     BowlingGame bowlingGame = new BowlingGame();
     bowlingGame.roll(1);
     int actualScore = bowlingGame.score();
@@ -14,7 +14,7 @@ public class BowlingGameShould {
   }
 
   @Test
-  public void haveCumulativeScoreAfterSingleRoleOf4() {
+  public void haveCumulativeScore4AfterSingleRoleOf4() {
     BowlingGame bowlingGame = new BowlingGame();
     bowlingGame.roll(4);
     int actualScore = bowlingGame.score();
@@ -22,7 +22,7 @@ public class BowlingGameShould {
     assertEquals(expectedScore, actualScore);
   }
   @Test
-  public void haveCumulativeScoreAfterRoll1ANd4() {
+  public void haveCumulativeScore5AfterRoll1And4() {
     BowlingGame bowlingGame = new BowlingGame();
     bowlingGame.roll(1);
     bowlingGame.roll(4);
@@ -32,7 +32,7 @@ public class BowlingGameShould {
   }
 
   @Test
-  public void haveCumulativeScoreAfterSpare() {
+  public void haveCumulativeScore20AfterSpareAnd6() {
     BowlingGame bowlingGame = new BowlingGame();
     bowlingGame.roll(6);
     bowlingGame.roll(4);
