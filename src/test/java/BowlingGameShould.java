@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BowlingGameShould {
@@ -29,6 +30,18 @@ public class BowlingGameShould {
         bowlingGame.roll(2);
         int actual = bowlingGame.score();
         assert actual == 3;
+    }
+
+    @Test
+    public void score20whenOneSpareInFourRolls() {
+        BowlingGame bowlingGame = new BowlingGame();
+        // gutterBowls(bowlingGame, 16);
+        bowlingGame.roll(5);
+        bowlingGame.roll(5);
+        bowlingGame.roll(4);
+        bowlingGame.roll(2);
+        int actual = bowlingGame.score();
+        Assert.assertEquals(20, actual);
     }
 
     private void gutterBowls(BowlingGame bowlingGame, int times) {
