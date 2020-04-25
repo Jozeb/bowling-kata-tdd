@@ -10,13 +10,15 @@ public class BowlingGameShould {
   @Test
   public void init() throws InvalidPinException {
     BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(3);
+    Pin value = new Pin(3);
+    bowlingGame.roll(value);
   }
 
   @Test(expected = InvalidPinException.class)
-  public void throwInvalidPinException() throws InvalidPinException {
+  public void notAllowInvalidPin() throws InvalidPinException {
     BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(11);
+    Pin value = new Pin(11);
+    bowlingGame.roll(value);
   }
 
 }
