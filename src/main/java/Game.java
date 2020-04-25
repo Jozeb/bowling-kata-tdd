@@ -27,13 +27,23 @@ public class Game {
     }
 
     public int score() {
-        ArrayList<Frame> frames = new ArrayList<Frame>();
-        for (int i = 0; i < rolls.size(); i+=2) {
+        ArrayList<Frame> frames = new ArrayList<>();
+        for (int i = 0; i < rolls.size(); ) {
             int rollOne = rolls.get(i);
+
+            if (rollOne == 10) {
+                Frame frame = new Frame(rollOne);
+                frames.add(frame);
+                i++;
+                continue;
+            }
+
             int rollTwo = rolls.get(i + 1);
             Frame frame = new Frame(rollOne, rollTwo);
             frames.add(frame);
+            i+=2;
         }
+
         ScoreCalculator scoreCalculator = new ScoreCalculator();
         return scoreCalculator.getScore(frames);
     }

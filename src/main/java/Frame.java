@@ -1,22 +1,32 @@
-public class Frame {
-    private int rollOne;
-    private int rollTwo;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    public Frame(int rollOne, int rollTwo) {
-        this.rollOne = rollOne;
-        this.rollTwo = rollTwo;
+public class Frame {
+
+    private List<Integer> rollList;
+
+    public Frame(int... rolls) {
+        this.rollList = new ArrayList<>();
+        Arrays.stream(rolls)
+            .forEach(roll -> this.rollList.add(roll));
     }
 
     public boolean isSpare() {
-        return (rollOne + rollTwo) == 10;
+        return 10 == getPinsKnockedDown() && rollList.size()>1;
     }
 
     public int getSpareCount() {
-        return rollOne;
+        return rollList.get(0);
     }
 
     public int getPinsKnockedDown() {
-        return (rollOne + rollTwo);
+        return rollList.stream()
+            .mapToInt(value -> value)
+            .sum();
     }
 
+    public boolean isStrike() {
+        return rollList.get(0) == 10;
+    }
 }

@@ -10,6 +10,13 @@ public class ScoreCalculator {
     public int getScore(List<Frame> frames) {
         for (int i = 0; i < frames.size(); i++) {
             Frame frame = frames.get(i);
+
+            if(frame.isStrike()){
+                Frame nextFrame = frames.get(i + 1);
+                score += frame.getPinsKnockedDown() + nextFrame.getPinsKnockedDown();
+                continue;
+            }
+
             if (frame.isSpare()) {
                 Frame nextFrame = frames.get(i + 1);
                 score += frame.getPinsKnockedDown() + nextFrame.getSpareCount();
