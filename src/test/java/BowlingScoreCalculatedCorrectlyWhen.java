@@ -3,7 +3,7 @@ import org.junit.Test;
 
 public class BowlingScoreCalculatedCorrectlyWhen {
     @Test
-    public void ThereIsNoSpareAndStrike() {
+    public void noPinsAreKnocked() {
         Game game = new Game();
         for (int i = 0; i < 20; i++)
             game.roll(0);
