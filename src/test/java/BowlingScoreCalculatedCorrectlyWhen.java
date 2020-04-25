@@ -31,5 +31,23 @@ public class BowlingScoreCalculatedCorrectlyWhen {
         Assert.assertEquals(29, game.score());
     }
 
+    @Test
+    public void thereIsASpareTest2() throws GameHasEndedException {
+
+        Game game = new Game();
+        game.roll(1);
+        game.roll(1);
+        game.roll(5);
+        game.roll(5);
+
+        for (int i=4; i<20; i++) {
+            game.roll(1);
+        }
+
+        Assert.assertEquals(29, game.score());
+    }
+
+
+
 
 }
