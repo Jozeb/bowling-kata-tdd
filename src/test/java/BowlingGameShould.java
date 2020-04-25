@@ -93,11 +93,11 @@ public class BowlingGameShould {
     }
 
     @Test
-    public void showCorrectScoreWithSampleReadmeGameWithStrikesIn10thFrame() {
+    public void showCorrectScoreWithTripleStrikes() {
         BowlingGame bowlingGame = new BowlingGame();
-        roll(bowlingGame, 1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 10, 10, 10);
+        roll(bowlingGame, 10, 10, 10, 1, 0);
         int actual = bowlingGame.score();
-        assertEquals(171, actual);
+        assertEquals(63, actual);
     }
 
     public void roll(BowlingGame bowlingGame, int... pins) {
