@@ -50,7 +50,15 @@ public class BowlingScoreCalculatedCorrectlyWhen {
         Assert.assertEquals(29, game.score());
     }
 
-
+    @Test
+    public void thereIsStrike() throws GameException {
+        Game game = new Game();
+        game.roll(10);
+        for (int i=1; i<19; i++) {
+            game.roll(1);
+        }
+        Assert.assertEquals(30, game.score());
+    }
 
 
 
