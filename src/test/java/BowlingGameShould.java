@@ -92,6 +92,14 @@ public class BowlingGameShould {
         assertEquals(133, actual);
     }
 
+    @Test
+    public void showCorrectScoreWithSampleReadmeGameWithStrikesIn10thFrame() {
+        BowlingGame bowlingGame = new BowlingGame();
+        roll(bowlingGame, 1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 10, 10, 10);
+        int actual = bowlingGame.score();
+        assertEquals(171, actual);
+    }
+
     public void roll(BowlingGame bowlingGame, int... pins) {
         for (int pin : pins) {
             bowlingGame.roll(pin);
