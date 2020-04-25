@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class BowlingGame {
     private int pinsDown;
     int rollIteration = 0;
@@ -5,7 +8,14 @@ public class BowlingGame {
     boolean isStrike;
     int strikePinCounter = 0;
 
+    List frames = new ArrayList();
+
     public void roll(int pins) {
+
+        if (rollIteration == 2 && sumOfTwoRolls < 10) {
+            frames.add(new Frame(sumOfTwoRolls, ScoreType.NORMAL));
+        }
+
         pinsDown += pins;
 
         if(isStrike){
