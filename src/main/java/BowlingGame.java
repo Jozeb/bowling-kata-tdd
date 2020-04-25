@@ -10,21 +10,21 @@ public class BowlingGame {
     }
 
     public int score() {
-        return recursiveScore(rolls, 0, 1);
+        return recursiveScore(rolls, -1, 1);
     }
 
     public int recursiveScore(List<Integer> numbers, int previousRoll, int multiplier) {
         if (numbers.size() > 0) {
             if (isSpare(numbers, previousRoll)) {
                 return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), 0, 2);
+                        + recursiveScore(splitList(numbers), -1, 2);
             }
             if (firstRollOfFrame(previousRoll)) {
                 return multiplyCurrentRoll(numbers, multiplier)
                         + recursiveScore(splitList(numbers), numbers.get(0), 1);
             }
             return multiplyCurrentRoll(numbers, multiplier)
-                    + recursiveScore(splitList(numbers), 0, 1);
+                    + recursiveScore(splitList(numbers), -1, 1);
         }
         return 0;
     }
@@ -38,7 +38,7 @@ public class BowlingGame {
     }
 
     private boolean firstRollOfFrame(int previousRoll) {
-        return previousRoll == 0;
+        return previousRoll == -1;
     }
 
     private boolean isSpare(List<Integer> numbers, int previousRoll) {
