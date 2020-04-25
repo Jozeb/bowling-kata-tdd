@@ -44,7 +44,7 @@ public class Game {
             i+=2;
         }
 
-        ScoreCalculator scoreCalculator = new ScoreCalculator();
-        return scoreCalculator.getScore(frames);
+        ScoreCalculator scoreCalculator = new ScoreCalculator(frames);
+        return scoreCalculator.getScore();
     }
 }

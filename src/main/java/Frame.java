@@ -29,4 +29,8 @@ public class Frame {
     public boolean isStrike() {
         return rollList.get(0) == 10;
     }
+
+    public boolean isNormalMove() {
+        return !isStrike() == !isSpare();
+    }
 }
