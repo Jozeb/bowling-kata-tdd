@@ -9,6 +9,9 @@ public class Score {
     public Score(int value) {
         this.value = value;
     }
+    public Score(){
+
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -22,4 +25,9 @@ public class Score {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public void add(Pin pin) {
+        this.value = this.value + pin.value;
+    }
+
 }
