@@ -1,8 +1,12 @@
 public class BowlingGame {
-    public void roll(int i) {
+
+    int score;
+
+    public void roll(int rollPins) {
+        this.score = this.score + rollPins;
     }
 
     public int score() {
-        return 1;
+        return this.score;
     }
 }
