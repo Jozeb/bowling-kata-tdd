@@ -23,5 +23,18 @@ public class BowlingGameShould {
         assert actual == 1;
     }
 
+    @Test
+    public void scoreThreeInTwoRolls() {
+        BowlingGame bowlingGame = new BowlingGame();
+
+        for (int i = 0; i < 18; i++) {
+            bowlingGame.roll(0);
+        }
+        bowlingGame.roll(1);
+        bowlingGame.roll(2);
+        int actual = bowlingGame.score();
+        assert actual == 3;
+    }
+
 
 }
