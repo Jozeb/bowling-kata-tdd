@@ -1,12 +1,18 @@
 package com.meetup.kata;
 
 public class Game {
-  private int score;
-  public void roll(int pins) {
-      score += pins;
+
+  private Score score;
+
+  Game() {
+    score = new Score();
   }
 
-  public int score() {
+  public void roll(int pins) {
+    score.update(pins);
+  }
+
+  public Score score() {
     return score;
   }
 }

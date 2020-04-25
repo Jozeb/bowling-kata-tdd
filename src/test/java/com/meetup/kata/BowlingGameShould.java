@@ -9,12 +9,14 @@ public class BowlingGameShould {
   public void calculateFrameScore()
   {
     Game game = new Game();
-    int firstRollPins = 5;
+    int firstRollPins = 6;
     game.roll(firstRollPins);
     int secondRollPins = 3;
     game.roll(secondRollPins);
 
-    Assert.assertEquals(8, game.score());
+    Score score =  game.score();
+
+    Assert.assertEquals(9,  score.getScore());
 
   }
 
