@@ -35,7 +35,7 @@ public class BowlingGameShould {
     @Test
     public void score20whenOneSpareInFourRolls() {
         BowlingGame bowlingGame = new BowlingGame();
-        // gutterBowls(bowlingGame, 16);
+        gutterBowls(bowlingGame, 16);
         bowlingGame.roll(5);
         bowlingGame.roll(5);
         bowlingGame.roll(4);
