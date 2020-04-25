@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BowlingGameShould {
@@ -19,6 +20,15 @@ public class BowlingGameShould {
     BowlingGame bowlingGame = new BowlingGame();
     Pin value = new Pin(11);
     bowlingGame.roll(value);
+  }
+
+  @Test
+  public void addToScore() {
+    BowlingGame bowlingGame = new BowlingGame();
+    Pin value = new Pin(2);
+    bowlingGame.roll(value);
+    int score = bowlingGame.score();
+    Assert.assertEquals(2,score);
   }
 
 }
