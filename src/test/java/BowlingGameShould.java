@@ -22,12 +22,23 @@ public class BowlingGameShould {
     assertEquals(expectedScore, actualScore);
   }
   @Test
-  public void haveCumulativeScoreAfterFrame1() {
+  public void haveCumulativeScoreAfterRoll1ANd4() {
     BowlingGame bowlingGame = new BowlingGame();
     bowlingGame.roll(1);
     bowlingGame.roll(4);
     int actualScore = bowlingGame.score();
     int expectedScore = 5;
+    assertEquals(expectedScore, actualScore);
+  }
+
+  @Test
+  public void haveCumulativeScoreAfterSpare() {
+    BowlingGame bowlingGame = new BowlingGame();
+    bowlingGame.roll(6);
+    bowlingGame.roll(4);
+    bowlingGame.roll(5);
+    int actualScore = bowlingGame.score();
+    int expectedScore = 20;
     assertEquals(expectedScore, actualScore);
   }
 
