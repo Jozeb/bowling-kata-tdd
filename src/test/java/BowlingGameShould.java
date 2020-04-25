@@ -10,6 +10,7 @@ public class BowlingGameShould {
   @Test
   public void init(){
     BowlingGame bowlingGame = new BowlingGame();
+    bowlingGame.roll(3);
   }
 
 }
