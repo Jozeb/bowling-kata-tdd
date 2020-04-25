@@ -13,5 +13,14 @@ public class BowlingGameShould {
     assertEquals(expectedScore, actualScore);
   }
 
+  @Test
+  public void haveCumulativeScoreAfterSingleRoleOf4() {
+    BowlingGame bowlingGame = new BowlingGame();
+    bowlingGame.roll(4);
+    int actualScore = bowlingGame.score();
+    int expectedScore = 4;
+    assertEquals(expectedScore, actualScore);
+  }
+
 
 }
