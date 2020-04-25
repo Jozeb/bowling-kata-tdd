@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static roll.RollingAfter.DOUBLE_STRIKE;
-import static roll.RollingAfter.STRIKE;
+import static roll.RollingAfter.SINGLE_STRIKE;
 import static roll.RollingAfter.NORMAL;
 import static roll.RollingAfter.SPARE;
 import static roll.RollingAfter.STRIKE_THEN_NORMAL;
@@ -19,33 +19,33 @@ public class BowlingGame {
     }
 
     public int score() {
-        return recursiveScore(rolls, NEW_FRAME, NORMAL);
+        return recursiveScore(rolls, NEW_FRAME, NORMAL, 1);
     }
 
-    public int recursiveScore(List<Integer> numbers, int previousRoll, RollingAfter rollingAfter) {
+    public int recursiveScore(List<Integer> numbers, int previousRoll, RollingAfter rollingAfter, int frameNumber) {
         if (numbers.size() > 0) {
-            if (isStrike(numbers, previousRoll)) {
-                if (rollingAfter == STRIKE) {
-                    return multiplyCurrentRoll(numbers, rollingAfter)
-                            + recursiveScore(splitList(numbers), NEW_FRAME, DOUBLE_STRIKE);
-                }
+            if (isStrike(numbers, previousRoll) && rollingAfter == SINGLE_STRIKE) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
-                        + recursiveScore(splitList(numbers), NEW_FRAME, STRIKE);
+                        + recursiveScore(splitList(numbers), NEW_FRAME, DOUBLE_STRIKE, frameNumber + 1);
             }
-            if (rollingAfter == STRIKE) {
+            if (isStrike(numbers, previousRoll) && rollingAfter != SINGLE_STRIKE) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
-                        + recursiveScore(splitList(numbers), numbers.get(0), STRIKE_THEN_NORMAL);
+                        + recursiveScore(splitList(numbers), NEW_FRAME, SINGLE_STRIKE, frameNumber + 1);
             }
-            if (isSpare(numbers, previousRoll)) {
+            if (rollingAfter == SINGLE_STRIKE) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
-                        + recursiveScore(splitList(numbers), NEW_FRAME, SPARE);
+                        + recursiveScore(splitList(numbers), numbers.get(0), STRIKE_THEN_NORMAL, frameNumber);
+            }
+            if (isSpare(numbers, previousRoll) && frameNumber != 10) {
+                return multiplyCurrentRoll(numbers, rollingAfter)
+                        + recursiveScore(splitList(numbers), NEW_FRAME, SPARE, frameNumber + 1);
             }
             if (isNewFrame(previousRoll)) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
-                        + recursiveScore(splitList(numbers), numbers.get(0), NORMAL);
+                        + recursiveScore(splitList(numbers), numbers.get(0), NORMAL, frameNumber);
             }
             return multiplyCurrentRoll(numbers, rollingAfter)
-                    + recursiveScore(splitList(numbers), NEW_FRAME, NORMAL);
+                    + recursiveScore(splitList(numbers), NEW_FRAME, NORMAL, frameNumber + 1);
         }
         return 0;
     }
