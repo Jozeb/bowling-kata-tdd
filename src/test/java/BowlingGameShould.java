@@ -28,4 +28,14 @@ public class BowlingGameShould {
         int actual = bowlingGame.score();
         assertEquals(2, actual);
     }
+
+    @Test
+    public void showCorrectScoreAfterSpare() {
+        BowlingGame bowlingGame = new BowlingGame();
+        bowlingGame.roll(5);
+        bowlingGame.roll(5);
+        bowlingGame.roll(1);
+        int actual = bowlingGame.score();
+        assertEquals(12, actual);
+    }
 }
