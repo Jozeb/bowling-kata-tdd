@@ -1,4 +1,3 @@
-import com.sun.tools.classfile.StackMapTable_attribute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +41,25 @@ public class BowlingGame {
         rollIteration++;
     }
 
+    private void computeActualFrameScore(Frame frame1, Frame frame2, Frame frame3) {
+
+        if(frame1.isStrike()) {
+            if(!frame2.isStrike()) {
+                frame1.addScore(frame2.getRoll1().get() + frame2.getRoll2().get());
+            }
+            else {
+                frame1.addScore(10 + frame3.getRoll1().get());
+            }
+        }
+
+        if(frame1.isSpare()) {
+            frame1.addScore(frame2.getRoll1().get());
+        }
+
+
+
+    }
+
     private void handleAfterSpare(int pins) {
         if (sumOfTwoRolls == 10) {
             pinsDown += pins;
@@ -60,6 +78,10 @@ public class BowlingGame {
     }
 
     public int score() {
-        return pinsDown;
+
+        for(int i=0 ; i<8 ; i++) {
+            computeActualFrameScore(frames.get(i), frames.get(i+1), frames.get(i+2));
+        }
+       return frames.stream().mapToInt(Frame::getScore).sum();
     }
 }
