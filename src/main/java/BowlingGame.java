@@ -6,6 +6,7 @@ public class BowlingGame {
     boolean isLastFrameStrike;
     int strikesHandled;
     boolean isSecondRoll;
+    int currentFrame;
 
     BowlingGame() {
         score = 0;
@@ -14,9 +15,13 @@ public class BowlingGame {
         isSecondRoll = false;
         isLastFrameSpare = false;
         isLastFrameStrike = false;
+        currentFrame = 1;
     }
 
     public void roll(int rollPins) {
+        if(this.currentFrame == 11){
+            throw new GameOverException();
+        }
         if (isLastFrameStrike) {
             handleLastStrikeCase(rollPins);
         } else if (isLastFrameSpare) {
@@ -35,6 +40,7 @@ public class BowlingGame {
             isLastFrameStrike = true;
             strikesHandled = 0;
             isSecondRoll = false;
+            currentFrame++;
         }
     }
 
@@ -47,6 +53,7 @@ public class BowlingGame {
             if (lastScore + rollPins == 10) {
                 isLastFrameSpare = true;
             }
+            currentFrame++;
         }
         isSecondRoll = !isSecondRoll;
     }
