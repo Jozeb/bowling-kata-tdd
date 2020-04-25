@@ -1,4 +1,3 @@
-import Game.Game;
 import org.junit.Test;
 
 public class BowlingGameShould {
