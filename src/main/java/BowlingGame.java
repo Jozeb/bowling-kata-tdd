@@ -28,7 +28,6 @@ public class BowlingGame {
 
         this.score = this.score + rollPins;
         lastScore = rollPins;
-        isSecondRoll = !isSecondRoll;
     }
 
     private void checkStrikeCase(int rollPins) {
@@ -49,6 +48,7 @@ public class BowlingGame {
                 isLastFrameSpare = true;
             }
         }
+        isSecondRoll = !isSecondRoll;
     }
 
     private void handleLastSpareCase(int rollPins) {
