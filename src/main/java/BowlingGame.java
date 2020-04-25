@@ -24,7 +24,7 @@ public class BowlingGame {
 
     public int recursiveScore(List<Integer> numbers, int previousRoll, RollingAfter rollingAfter) {
         if (numbers.size() > 0) {
-            if (isNewFrame(previousRoll) && numbers.get(0) == 10) {
+            if (isStrike(numbers, previousRoll)) {
                 if (rollingAfter == STRIKE) {
                     return multiplyCurrentRoll(numbers, rollingAfter)
                             + recursiveScore(splitList(numbers), NEW_FRAME, DOUBLE_STRIKE);
@@ -48,6 +48,10 @@ public class BowlingGame {
                     + recursiveScore(splitList(numbers), NEW_FRAME, NORMAL);
         }
         return 0;
+    }
+
+    private boolean isStrike(List<Integer> numbers, int previousRoll) {
+        return isNewFrame(previousRoll) && numbers.get(0) == 10;
     }
 
     private List<Integer> splitList(List<Integer> numbers) {
