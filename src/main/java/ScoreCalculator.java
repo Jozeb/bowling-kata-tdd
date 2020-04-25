@@ -2,18 +2,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import javafx.util.Pair;
 
 public class ScoreCalculator {
-    //private int score;
+
     private List<Frame> frames;
+    Map<FrameScoringMethod, Function<Pair<Frame,Frame>, Integer>> frameScoringStrategy = new HashMap<>();
 
     public ScoreCalculator(List<Frame> frames) {
-        //frameScoringStrategy.put(FrameScoringMethod.STRIKE, ScoreCalculator::calculateForNormal);
+        frameScoringStrategy.put(FrameScoringMethod.STRIKE, ScoreCalculator::calculateForStrike);
+        frameScoringStrategy.put(FrameScoringMethod.SPARE, ScoreCalculator::calculateForSpare);
+        frameScoringStrategy.put(FrameScoringMethod.NORMAL, ScoreCalculator::calculateForNormal);
         this.frames = frames;
     }
 
 
-    Map<FrameScoringMethod, Function<Frame, Void>> frameScoringStrategy = new HashMap<>();
 
     public int getScore() {
         int score = 0;
@@ -21,31 +24,37 @@ public class ScoreCalculator {
             Frame frame = frames.get(i);
             Frame nextFrame = frames.get(i + 1);
 
-            score += calculateForStrike(frame, nextFrame);
-            score +=calculateForSpare(frame, nextFrame);
-            score += calculateForNormal(frame, nextFrame);
+            FrameScoringMethod frameScoringMethod = FrameHelper.getframeScoringMethod(frame);
+            score += frameScoringStrategy.get(frameScoringMethod).apply(new Pair<>(frame, nextFrame));
+
+
 
         }
         Frame frame = frames.get(9);
-        score += calculateForNormal(frame, null);
+        score += calculateForNormal(new Pair<>(frame, null));
         return score;
     }
 
-    private static int calculateForNormal(Frame frame, Frame nextFrame) {
+    private static int calculateForNormal(Pair<Frame,Frame> frameScoringPair) {
+        Frame frame = frameScoringPair.getKey();
         if (frame.isNormalMove()) {
             return frame.getPinsKnockedDown();
         }
         return 0;
     }
 
-    private int calculateForSpare(Frame frame, Frame nextFrame) {
+    private static int calculateForSpare(Pair<Frame, Frame> frameScoringPair) {
+        Frame frame = frameScoringPair.getKey();
+        Frame nextFrame = frameScoringPair.getValue();
         if (frame.isSpare()) {
             return frame.getPinsKnockedDown() + nextFrame.getSpareCount();
         }
         return 0;
     }
 
-    private static int calculateForStrike(Frame frame, Frame nextFrame) {
+    private static int calculateForStrike(Pair<Frame,Frame> frameScoringPair) {
+        Frame frame = frameScoringPair.getKey();
+        Frame nextFrame = frameScoringPair.getValue();
         if (frame.isStrike()) {
             return frame.getPinsKnockedDown() + nextFrame.getPinsKnockedDown();
         }
