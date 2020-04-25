@@ -21,6 +21,15 @@ public class BowlingGameShould {
     int expectedScore = 4;
     assertEquals(expectedScore, actualScore);
   }
+  @Test
+  public void haveCumulativeScoreAfterFrame1() {
+    BowlingGame bowlingGame = new BowlingGame();
+    bowlingGame.roll(1);
+    bowlingGame.roll(4);
+    int actualScore = bowlingGame.score();
+    int expectedScore = 5;
+    assertEquals(expectedScore, actualScore);
+  }
 
 
 }
