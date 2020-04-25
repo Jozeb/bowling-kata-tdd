@@ -19,8 +19,12 @@ public class BowlingGame {
                 return multiplier * numbers.get(0)
                         + recursiveScore(numbers.subList(1, numbers.size()), 0, 2);
             }
+            if (previousRoll == 0) {
+                return multiplier * numbers.get(0)
+                        + recursiveScore(numbers.subList(1, numbers.size()), numbers.get(0), 1);
+            }
             return multiplier * numbers.get(0)
-                    + recursiveScore(numbers.subList(1, numbers.size()), numbers.get(0), 1);
+                    + recursiveScore(numbers.subList(1, numbers.size()), 0, 1);
         }
         return 0;
     }
