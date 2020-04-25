@@ -1,11 +1,11 @@
 import org.junit.Test;
 
-public class BowlingGameShould2 {
+public class BowlingGameOn10RollShould {
 
     @Test(
             expected = GameOverException.class
     )
-    public void throwExceptionOnEleventhFrame(){
+    public void throwExceptionWhenNoSpareOrStrike(){
         BowlingGame bowlingGame = new BowlingGame();
 
         bowlingGame.roll(1);
@@ -38,9 +38,6 @@ public class BowlingGameShould2 {
         bowlingGame.roll(1);
 
         bowlingGame.roll(1);
-
-
-
 
     }
 }
