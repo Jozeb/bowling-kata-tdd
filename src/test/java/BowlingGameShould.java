@@ -24,7 +24,8 @@ public class BowlingGameShould {
                 {Arrays.asList(1), 1},
                 {Arrays.asList(4), 4},
                 {Arrays.asList(1, 4), 5},
-                {Arrays.asList(6, 4, 5), 20} // spare case
+                {Arrays.asList(6, 4, 5), 20}, // spare + 1 roll case
+                {Arrays.asList(6, 4, 5, 3), 23},
         });
     }
 

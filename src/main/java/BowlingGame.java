@@ -13,8 +13,9 @@ public class BowlingGame {
     public void roll(int rollPins) {
 
         if (last_score == 10) {
-            rollPins = rollPins * 2;
+            this.score = this.score + rollPins;
         }
+        
         if (isSecondRoll) {
             last_score = last_score + rollPins;
         } else {
