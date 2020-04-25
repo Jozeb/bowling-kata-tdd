@@ -10,7 +10,6 @@ public class Score {
         this.value = value;
     }
     public Score(){
-
     }
 
     @Override
