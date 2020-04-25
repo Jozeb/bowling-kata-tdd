@@ -116,6 +116,14 @@ public class BowlingGameShould {
         assertEquals(300, actual);
     }
 
+    @Test
+    public void showScoreForAllSpares() {
+        BowlingGame bowlingGame = new BowlingGame();
+        roll(bowlingGame, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5);
+        int actual = bowlingGame.score();
+        assertEquals(150, actual);
+    }
+
     public void roll(BowlingGame bowlingGame, int... pins) {
         for (int pin : pins) {
             bowlingGame.roll(pin);
