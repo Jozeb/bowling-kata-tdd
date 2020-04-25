@@ -1,4 +1,4 @@
 package exceptions;
 
-public class InvalidRollException {
+public class InvalidRollException extends  Exception {
 }

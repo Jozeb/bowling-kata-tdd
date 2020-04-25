@@ -1,3 +1,6 @@
+import exceptions.GameHasEndedException;
+import exceptions.InvalidRollException;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -10,14 +13,16 @@ public class Game {
         this.rolls = new ArrayList<>();
     }
 
-    public void roll(int i) throws GameHasEndedException {
+    public void roll(int i) throws GameHasEndedException, InvalidRollException {
 
+        if(i>10){
+          throw  new InvalidRollException();
+        }
         if(rollsCount>=20) {
             throw new GameHasEndedException();
         }
         rolls.add(i);
         rollsCount++;
-
     }
 
     public int score() {
