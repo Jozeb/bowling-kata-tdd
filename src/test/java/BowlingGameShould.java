@@ -11,20 +11,14 @@ public class BowlingGameShould {
   @Test
   public void AllowRolling() {
     BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(5);
-  }
-
-  @Test(expected = AssertionError.class)
-  public void AllowPositiveRolling() {
-    BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(-5);
+    bowlingGame.roll(new KnockedPinCount(5));
   }
 
   @Test
-  public void ReturnRunningScore() {
+  public void TrackRunningScore() {
     BowlingGame bowlingGame = new BowlingGame();
-    bowlingGame.roll(1);
-    bowlingGame.roll(2);
+    bowlingGame.roll(new KnockedPinCount(1));
+    bowlingGame.roll(new KnockedPinCount(2));
 
     int runningScore = bowlingGame.getRunningScore();
 

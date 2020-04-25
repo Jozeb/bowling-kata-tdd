@@ -1,18 +1,16 @@
 class BowlingGame {
 
-    int total;
+    int runningScore;
 
     public BowlingGame() {
-        this.total = 0;
+        this.runningScore = 0;
     }
 
-    public void roll(int pins) {
-        if (pins < 0) throw new AssertionError("Knocked pin count should not be negative.");
-
-        total += pins;
+    public void roll(KnockedPinCount knockedPinCount) {
+        runningScore += knockedPinCount.getCount();
     }
 
     public int getRunningScore() {
-        return total;
+        return runningScore;
     }
 }
