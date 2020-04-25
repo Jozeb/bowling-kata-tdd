@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class Game {
-    private int score;
 
     private int rollsCount;
 
@@ -22,25 +21,14 @@ public class Game {
     }
 
     public int score() {
-        int score = 0;
-
+        ArrayList<Frame> frames = new ArrayList<Frame>();
         for (int i = 0; i < rolls.size(); i+=2) {
             int rollOne = rolls.get(i);
             int rollTwo = rolls.get(i + 1);
-
-            if (isSpare(rollOne, rollTwo)) {
-                score += 10 + rolls.get(i + 2);
-            }
-            if (!isSpare(rollOne, rollTwo)) {
-                score += rollOne + rollTwo;
-            }
-
+            Frame frame = new Frame(rollOne, rollTwo);
+            frames.add(frame);
         }
-
-        return score;
-    }
-
-    private boolean isSpare(int rollOne, int rollTwo) {
-        return  rollOne+rollTwo == 10;
+        ScoreCalculator scoreCalculator = new ScoreCalculator();
+        return scoreCalculator.getScore(frames);
     }
 }
