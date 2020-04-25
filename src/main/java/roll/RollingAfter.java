@@ -8,4 +8,8 @@ public enum RollingAfter {
     RollingAfter(int multiplier) {
         this.multiplier = multiplier;
     }
+
+    public int getMultiplier() {
+        return multiplier;
+    }
 }

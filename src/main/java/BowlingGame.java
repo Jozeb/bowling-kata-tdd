@@ -19,33 +19,33 @@ public class BowlingGame {
     }
 
     public int score() {
-        return recursiveScore(rolls, NEW_FRAME, 1, NORMAL);
+        return recursiveScore(rolls, NEW_FRAME, NORMAL);
     }
 
-    public int recursiveScore(List<Integer> numbers, int previousRoll, int multiplier, RollingAfter rollingAfter) {
+    public int recursiveScore(List<Integer> numbers, int previousRoll, RollingAfter rollingAfter) {
         if (numbers.size() > 0) {
             if (isNewFrame(previousRoll) && numbers.get(0) == 10) {
                 if (rollingAfter == STRIKE) {
-                    return multiplyCurrentRoll(numbers, multiplier)
-                            + recursiveScore(splitList(numbers), NEW_FRAME, 3, DOUBLE_STRIKE);
+                    return multiplyCurrentRoll(numbers, rollingAfter)
+                            + recursiveScore(splitList(numbers), NEW_FRAME, DOUBLE_STRIKE);
                 }
-                return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), NEW_FRAME, 2, STRIKE);
+                return multiplyCurrentRoll(numbers, rollingAfter)
+                        + recursiveScore(splitList(numbers), NEW_FRAME, STRIKE);
             }
             if (rollingAfter == STRIKE) {
-                return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), numbers.get(0), 2, STRIKE_THEN_NORMAL);
+                return multiplyCurrentRoll(numbers, rollingAfter)
+                        + recursiveScore(splitList(numbers), numbers.get(0), STRIKE_THEN_NORMAL);
             }
             if (isSpare(numbers, previousRoll)) {
-                return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), NEW_FRAME, 2, SPARE);
+                return multiplyCurrentRoll(numbers, rollingAfter)
+                        + recursiveScore(splitList(numbers), NEW_FRAME, SPARE);
             }
             if (isNewFrame(previousRoll)) {
-                return multiplyCurrentRoll(numbers, multiplier)
-                        + recursiveScore(splitList(numbers), numbers.get(0), 1, NORMAL);
+                return multiplyCurrentRoll(numbers, rollingAfter)
+                        + recursiveScore(splitList(numbers), numbers.get(0), NORMAL);
             }
-            return multiplyCurrentRoll(numbers, multiplier)
-                    + recursiveScore(splitList(numbers), NEW_FRAME, 1, NORMAL);
+            return multiplyCurrentRoll(numbers, rollingAfter)
+                    + recursiveScore(splitList(numbers), NEW_FRAME, NORMAL);
         }
         return 0;
     }
@@ -54,8 +54,8 @@ public class BowlingGame {
         return numbers.subList(1, numbers.size());
     }
 
-    private int multiplyCurrentRoll(List<Integer> numbers, int multiplier) {
-        return multiplier * numbers.get(0);
+    private int multiplyCurrentRoll(List<Integer> numbers, RollingAfter rollingAfter) {
+        return rollingAfter.getMultiplier() * numbers.get(0);
     }
 
     private boolean isNewFrame(int previousRoll) {
