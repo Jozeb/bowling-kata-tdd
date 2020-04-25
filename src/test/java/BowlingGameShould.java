@@ -76,4 +76,93 @@ public class BowlingGameShould {
 
     Assert.assertEquals(expected, score);
   }
+
+  @Test
+  public void addToScoreWhenStrike() throws BowlingGameException {
+    BowlingGame bowlingGame = new BowlingGame();
+    Score expected = new Score(28);
+
+    List<Pin> pins = new ArrayList<Pin>();
+    pins.add(new Pin(10));
+    pins.add(new Pin(7));
+    pins.add( new Pin(2));
+
+    for(Pin pin: pins) {
+      bowlingGame.roll(pin);
+    }
+
+    Score score = bowlingGame.score();
+
+    Assert.assertEquals(expected, score);
+  }
+
+  @Test
+  public void addToScoreWhenLastFrameSpareOrStrike() throws BowlingGameException {
+    BowlingGame bowlingGame = new BowlingGame();
+    Score expected = new Score(133);
+
+    List<Pin> pins = new ArrayList<Pin>();
+    pins.add(new Pin(1));
+    pins.add(new Pin(4));
+    pins.add( new Pin(4));
+    pins.add(new Pin(5));
+    pins.add( new Pin(6));
+    pins.add( new Pin(4));
+    pins.add( new Pin(5));
+    pins.add( new Pin(5));
+    pins.add( new Pin(10));
+    pins.add( new Pin(0));
+    pins.add( new Pin(1));
+    pins.add( new Pin(7));
+    pins.add( new Pin(3));
+    pins.add( new Pin(6));
+    pins.add( new Pin(4));
+    pins.add( new Pin(10));
+    pins.add( new Pin(2));
+    pins.add( new Pin(8));
+    pins.add( new Pin(6));
+
+    for(Pin pin: pins) {
+      bowlingGame.roll(pin);
+    }
+
+    Score score = bowlingGame.score();
+
+    Assert.assertEquals(expected, score);
+  }
+
+  @Test(expected = GameOverException.class)
+  public void notAllowMoreThan10FramesWhenLastFrameNormal() throws BowlingGameException {
+    BowlingGame bowlingGame = new BowlingGame();
+    Score expected = new Score(133);
+
+    List<Pin> pins = new ArrayList<Pin>();
+    pins.add(new Pin(1));
+    pins.add(new Pin(4));
+    pins.add( new Pin(4));
+    pins.add(new Pin(5));
+    pins.add( new Pin(6));
+    pins.add( new Pin(4));
+    pins.add( new Pin(5));
+    pins.add( new Pin(5));
+    pins.add( new Pin(10));
+    pins.add( new Pin(0));
+    pins.add( new Pin(1));
+    pins.add( new Pin(7));
+    pins.add( new Pin(3));
+    pins.add( new Pin(6));
+    pins.add( new Pin(4));
+    pins.add( new Pin(10));
+    pins.add( new Pin(2));
+    pins.add( new Pin(6));
+    pins.add( new Pin(6));
+
+    for(Pin pin: pins) {
+      bowlingGame.roll(pin);
+    }
+
+    Score score = bowlingGame.score();
+
+    Assert.assertEquals(expected, score);
+  }
 }

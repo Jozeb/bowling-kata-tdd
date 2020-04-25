@@ -36,4 +36,8 @@ public class Frame {
     public boolean isSpare() {
         return frameType.equals(FrameType.SPARE);
     }
+
+    public boolean isNormal() {
+        return frameType.equals(FrameType.NORMAL);
+    }
 }

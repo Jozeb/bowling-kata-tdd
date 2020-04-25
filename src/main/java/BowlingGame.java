@@ -7,7 +7,7 @@ public class BowlingGame {
 
     Frames frames = new Frames();
 
-    public void roll(Pin pin) throws InvalidFrameException {
+    public void roll(Pin pin) throws BowlingGameException {
         frames.add(pin);
     }
 
