@@ -85,11 +85,11 @@ public class BowlingGameShould {
     }
 
     @Test
-    public void showCorrectScoreWithSampleReadmeGameExceptLastMove() {
+    public void showCorrectScoreWithSampleReadmeGame() {
         BowlingGame bowlingGame = new BowlingGame();
-        roll(bowlingGame, 1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8);
+        roll(bowlingGame, 1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6);
         int actual = bowlingGame.score();
-        assertEquals(127, actual);
+        assertEquals(133, actual);
     }
 
     public void roll(BowlingGame bowlingGame, int... pins) {
