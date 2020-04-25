@@ -48,6 +48,6 @@ public class BowlingGameShould {
         bowlingGame.roll(5);
         bowlingGame.roll(1);
         int actual = bowlingGame.score();
-        assertEquals(12, actual);
+        assertEquals(27, actual);
     }
 }
