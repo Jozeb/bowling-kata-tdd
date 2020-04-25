@@ -60,6 +60,14 @@ public class BowlingGameShould {
         assertEquals(27, actual);
     }
 
+    @Test
+    public void showCorrectScoreWithOneStrike() {
+        BowlingGame bowlingGame = new BowlingGame();
+        roll(bowlingGame, 10, 1, 1);
+        int actual = bowlingGame.score();
+        assertEquals(14, actual);
+    }
+
     public void roll(BowlingGame bowlingGame, int... pins) {
         for (int pin : pins) {
             bowlingGame.roll(pin);
