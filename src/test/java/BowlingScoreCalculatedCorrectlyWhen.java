@@ -10,7 +10,7 @@ public class BowlingScoreCalculatedCorrectlyWhen {
         Assert.assertEquals(game.score(), 0);
     }
 
-    @Test(expected = GameHasEndedException.class)
+    @Test
     public void thereIsNoStrikeOrSpare() throws GameHasEndedException {
         Game game = new Game();
         for (int i = 0; i < 20; i++)
