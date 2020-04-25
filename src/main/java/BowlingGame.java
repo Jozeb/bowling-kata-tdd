@@ -1,3 +1,5 @@
+import com.sun.tools.classfile.StackMapTable_attribute;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +10,21 @@ public class BowlingGame {
     boolean isStrike;
     int strikePinCounter = 0;
 
-    List frames = new ArrayList();
+
+
+    private List<Frame> frames = new ArrayList(){{add(new Frame());}};
+
+
 
     public void roll(int pins) {
 
-        if (rollIteration == 2 && sumOfTwoRolls < 10) {
-            frames.add(new Frame(sumOfTwoRolls, ScoreType.NORMAL));
+        Frame lastFrame = frames.get(frames.size()-1);
+
+        if(lastFrame.isFrameCompleted()){
+            lastFrame = new Frame();
+            frames.add(lastFrame);
         }
+        lastFrame.add(pins);
 
         pinsDown += pins;
 
