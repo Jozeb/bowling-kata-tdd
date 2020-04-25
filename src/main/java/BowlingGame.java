@@ -24,11 +24,11 @@ public class BowlingGame {
 
     public int recursiveScore(List<Integer> numbers, int previousRoll, RollingAfter rollingAfter, int frameNumber) {
         if (numbers.size() > 0) {
-            if (isStrike(numbers, previousRoll) && rollingAfter.strike()) {
+            if (isStrike(numbers, previousRoll) && rollingAfter.strike() && frameNumber != 10) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
                         + recursiveScore(splitList(numbers), NEW_FRAME, DOUBLE_STRIKE, frameNumber + 1);
             }
-            if (isStrike(numbers, previousRoll) && !rollingAfter.strike()) {
+            if (isStrike(numbers, previousRoll) && rollingAfter.notStrike() && frameNumber != 10) {
                 return multiplyCurrentRoll(numbers, rollingAfter)
                         + recursiveScore(splitList(numbers), NEW_FRAME, SINGLE_STRIKE, frameNumber + 1);
             }

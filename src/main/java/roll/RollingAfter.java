@@ -13,6 +13,10 @@ public enum RollingAfter {
         return this == SINGLE_STRIKE || this == DOUBLE_STRIKE;
     }
 
+    public boolean notStrike() {
+        return !strike();
+    }
+
     public int getMultiplier() {
         return multiplier;
     }
