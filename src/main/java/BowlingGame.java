@@ -15,7 +15,7 @@ public class BowlingGame {
         if (last_score == 10) {
             this.score = this.score + rollPins;
         }
-        
+
         if (isSecondRoll) {
             last_score = last_score + rollPins;
         } else {
