@@ -1,4 +1,5 @@
 import org.junit.Test;
+import roll.Pins;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,7 +8,7 @@ public class BowlingGameShould {
     @Test
     public void showZeroScoreWhenNoPinsAreDown() {
         BowlingGame bowlingGame = new BowlingGame();
-        bowlingGame.roll(0);
+        bowlingGame.roll(new Pins(0));
         int actual = bowlingGame.score();
         assertEquals(0, actual);
     }
@@ -15,7 +16,7 @@ public class BowlingGameShould {
     @Test
     public void showOneScoreWhenOnePinsIsDown() {
         BowlingGame bowlingGame = new BowlingGame();
-        bowlingGame.roll(1);
+        bowlingGame.roll(new Pins(1));
         int actual = bowlingGame.score();
         assertEquals(1, actual);
     }
@@ -126,7 +127,7 @@ public class BowlingGameShould {
 
     public void roll(BowlingGame bowlingGame, int... pins) {
         for (int pin : pins) {
-            bowlingGame.roll(pin);
+            bowlingGame.roll(new Pins(pin));
         }
     }
 }
