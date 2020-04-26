@@ -8,8 +8,7 @@ public class BowlingGameShould {
     public void showZeroScoreWhenNoPinsAreDown() {
         BowlingGame bowlingGame = new BowlingGame();
         roll(bowlingGame, 0);
-        int actual = bowlingGame.score();
-        assertEquals(0, actual);
+        assertEquals(0, bowlingGame.score());
     }
 
     public void roll(BowlingGame bowlingGame, int... pins) {
